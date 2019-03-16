@@ -57,5 +57,4 @@ series.append('path')
     .attr('stroke', function(d) { return mat(d.id); })
     .attr('stroke-width', '1.5px')
     .attr('d', function(d) { return line(d.values) });
-    
 })();

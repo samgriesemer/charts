@@ -13,8 +13,8 @@ function generate() {
 
 // d3
 var svg = d3.select("#a_pie")
-    .attr("width", full_width)
-    .attr("height", full_height),
+      .attr("width", full_width)
+      .attr("height", full_height),
     g = svg.append("g").attr("transform", "translate(" + full_width / 2 + "," + full_height / 2 + ")"),
     radius = height/2.7,
     data = generate();

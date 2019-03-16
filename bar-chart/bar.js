@@ -5,12 +5,13 @@ var svg = d3.select("svg")
     .attr("height", height + margin.top + margin.bottom),
     g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-d3.csv('/path/to/data.csv', function(d) {
-  // function for data prep
-  d.count = +d.count;
-  return d;
-}, function(error, data) {
+d3.csv('/path/to/data.csv', function(error, data) {
   if (error) throw(error);
+
+  // data preprocessing
+  data.forEach(function(d) {
+    d.attr = +d.attr;
+  });
   
   var x = d3.scaleBand().range([0, width]).padding(0.1),
       y = d3.scaleLinear().range([height, 0]);
@@ -44,7 +45,7 @@ d3.csv('/path/to/data.csv', function(d) {
       div
         .style("left", (d3.event.pageX - 34) + "px")
         .style("top", (d3.event.pageY - 12) + "px")
-        .text('count : ' + format(d.count));
+        .text('count : ' + format(d.attr));
     })
     .on("mouseout", mouseout);
 });

@@ -73,7 +73,6 @@ d3.timer(function(d) {
     ]);
     
     if (i===0) {
-
       // render w/o transition on first loop
       g.selectAll('.line')
         .data(data)

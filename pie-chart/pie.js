@@ -1,20 +1,21 @@
 (function() {
  
 var svg = d3.select("svg")
-    .attr("width", full_width)
-    .attr("height", full_height),
+      .attr("width", full_width)
+      .attr("height", full_height),
     g = svg.append("g").attr("transform", "translate(" + full_width/2 + "," + full_height/2 + ")"),
     radius = height/2;
 
-d3.csv('/path/to/data.csv', function(d) {
-  // function for data prep
-  d.count = +d.count;
-  return d;
-}, function(error, data) {
+d3.csv('/path/to/data.csv', function(error, data) {
   if (error) throw(error);
+
+  // data preprocessing
+  data.forEach(function(d) {
+    d.attr = +d.attr;
+  });
   
   var pie = d3.pie()
-      .value(function(d) { return d.count })
+      .value(function(d) { return d.attr })
 
   var path = d3.arc()
       .outerRadius(radius)
@@ -58,7 +59,7 @@ d3.csv('/path/to/data.csv', function(d) {
       div
         .style("left", (d3.event.pageX - 34) + "px")
         .style("top", (d3.event.pageY - 12) + "px")
-        .text(d.data.animal + ' : ' + d.data.count)
+        .text(d.data.attr)
       .selectAll('rect').data(data)
       .enter().append('rect')
         .attr("x", (d3.event.pageX - 38) + "px")
